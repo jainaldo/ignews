@@ -1,5 +1,5 @@
 import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
 interface ActiveLinkProps extends LinkProps {
@@ -12,9 +12,9 @@ export function ActiveLink({
   activeClassName,
   ...rest
 }: ActiveLinkProps) {
-  const { asPath } = useRouter();
+  const pathname = usePathname();
 
-  const className = asPath === rest.href ? activeClassName : "";
+  const className = pathname === rest.href ? activeClassName : "";
 
   return (
     <Link className={className} {...rest}>
