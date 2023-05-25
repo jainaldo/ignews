@@ -15,7 +15,7 @@ jest.mock('next-auth/react', () => {
       return {
         update: (data) => {},
         data: null,
-        status: "authenticated"
+        status: "unauthenticated"
       }
     }
   }
