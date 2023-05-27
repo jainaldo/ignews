@@ -8,18 +8,18 @@ interface SubscribeButtonProps {
   priceId: string;
 }
 
-export function SubscribeButton({ priceId } : SubscribeButtonProps) {
+export function SubscribeButton() {
   const { data: session }= useSession();
   const router = useRouter();
 
   async function handleSubscribe() {
     if (!session) {
-      signIn('github')
+      await signIn('github');
       return;
     }
 
     if (session.activeSubscription) {
-      router.push('/posts');
+      await router.push('/posts');
       return;
     }
 
@@ -29,7 +29,7 @@ export function SubscribeButton({ priceId } : SubscribeButtonProps) {
 
       const stripe = await getStripeJs();
 
-      stripe.redirectToCheckout({ sessionId });
+      await stripe.redirectToCheckout({ sessionId });
     } catch (error) {
       alert(error.messsage);
     }
